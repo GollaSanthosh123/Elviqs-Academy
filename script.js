@@ -140,3 +140,59 @@ document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
 console.log(
     "Elviq's Academy website loaded successfully."
 );
+/* =====================================================
+   TOP 10 LEADERBOARD
+   Names loaded from top10.txt
+   ===================================================== */
+
+async function loadTop10() {
+
+    try {
+
+        const response = await fetch("top10.txt");
+
+        if (!response.ok) {
+            throw new Error("Could not load top10.txt");
+        }
+
+        const text = await response.text();
+
+        const names = text
+            .split(/\r?\n/)
+            .map(name => name.trim())
+            .filter(name => name !== "")
+            .slice(0, 10);
+
+        const leaderboard = document.getElementById("top10Leaderboard");
+
+        if (!leaderboard) return;
+
+        const medals = ["🥇", "🥈", "🥉"];
+
+        leaderboard.innerHTML = "";
+
+        names.forEach((name, index) => {
+
+            const row = document.createElement("div");
+
+            row.className = "leader-row";
+
+            const rank = index + 1;
+
+            row.innerHTML = `
+                <b>${medals[index] || rank} ${rank}</b>
+                <span>${name}</span>
+                <strong>--/30</strong>
+            `;
+
+            leaderboard.appendChild(row);
+
+        });
+
+    } catch (error) {
+
+        console.error("Top 10 loading error:", error);
+
+    }
+}
+loadTop10();
