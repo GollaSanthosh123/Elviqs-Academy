@@ -142,7 +142,9 @@ console.log(
 );
 /* =====================================================
    TOP 10 LEADERBOARD
-   Names loaded from top10.txt
+   Names and scores loaded from top10.txt
+   Format:
+   Name|Score
    ===================================================== */
 
 async function loadTop10() {
@@ -157,13 +159,14 @@ async function loadTop10() {
 
         const text = await response.text();
 
-        const names = text
+        const students = text
             .split(/\r?\n/)
-            .map(name => name.trim())
-            .filter(name => name !== "")
+            .map(line => line.trim())
+            .filter(line => line !== "")
             .slice(0, 10);
 
-        const leaderboard = document.getElementById("top10Leaderboard");
+        const leaderboard =
+            document.getElementById("top10Leaderboard");
 
         if (!leaderboard) return;
 
@@ -171,18 +174,32 @@ async function loadTop10() {
 
         leaderboard.innerHTML = "";
 
-        names.forEach((name, index) => {
+        students.forEach((student, index) => {
+
+            // Split Name and Score
+            const parts = student.split("|");
+
+            const name = parts[0].trim();
+            const score = parts[1]
+                ? parts[1].trim()
+                : "--/30";
+
+            const rank = index + 1;
 
             const row = document.createElement("div");
 
             row.className = "leader-row";
 
-            const rank = index + 1;
+            // Medal for Top 3, normal number for others
+            const rankDisplay =
+                medals[index]
+                    ? `${medals[index]} ${rank}`
+                    : `${rank}`;
 
             row.innerHTML = `
-                <b>${medals[index] || rank} ${rank}</b>
+                <b>${rankDisplay}</b>
                 <span>${name}</span>
-                <strong>--/30</strong>
+                <strong>${score}</strong>
             `;
 
             leaderboard.appendChild(row);
@@ -194,5 +211,7 @@ async function loadTop10() {
         console.error("Top 10 loading error:", error);
 
     }
+
 }
+
 loadTop10();
