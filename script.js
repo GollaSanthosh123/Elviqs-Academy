@@ -215,3 +215,51 @@ async function loadTop10() {
 }
 
 loadTop10();
+/* =====================================================
+   SOCIAL MEDIA LINKS
+   ===================================================== */
+
+document.querySelectorAll("[data-linkedin]").forEach(button => {
+
+    button.addEventListener("click", function(event) {
+
+        event.preventDefault();
+
+        const linkedinLink = ELVIQ_LINKS.linkedin;
+
+        if (!linkedinLink || linkedinLink.trim() === "") {
+
+            alert("LinkedIn link will be available soon.");
+
+            return;
+
+        }
+
+        window.open(linkedinLink, "_blank");
+
+    });
+
+});
+
+
+document.querySelectorAll("[data-instagram]").forEach(button => {
+
+    button.addEventListener("click", function(event) {
+
+        event.preventDefault();
+
+        const instagramLink = ELVIQ_LINKS.instagram;
+
+        if (!instagramLink || instagramLink.trim() === "") {
+
+            alert("Instagram link will be available soon.");
+
+            return;
+
+        }
+
+        window.open(instagramLink, "_blank");
+
+    });
+
+});

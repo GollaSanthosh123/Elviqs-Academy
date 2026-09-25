@@ -33,17 +33,16 @@ const ELVIQ_LINKS = {
     aptitude: "https://docs.google.com/forms/d/e/1FAIpQLSdirg57Hlp50a6qcFao5f4phgMFS-QqAkpREKtm-_AQTRiSNg/viewform?usp=publish-editor",
 
 
-    // ==============================
-    // WHATSAPP GROUP
-    // ==============================
+   // ==============================
+// SOCIAL & CONTACT LINKS
+// ==============================
 
-    whatsapp: "",
+whatsapp: "YOUR_WHATSAPP_GROUP_LINK",
 
+linkedin: "YOUR_LINKEDIN_PAGE_LINK",
 
-    // ==============================
-    // CONTACT EMAIL
-    // ==============================
+instagram: "YOUR_INSTAGRAM_PAGE_LINK",
 
-    email: "YOUR_EMAIL@example.com"
+email: "elviqsacademy@gmail.com"
 
 };
