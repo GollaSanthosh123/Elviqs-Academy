@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Internship Application | Elviq's Academy</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =========================
+           APPLICATION PAGE
+        ========================== */
+
+        .application-page {
+            min-height: 100vh;
+            background: var(--pale-blue);
+            padding: 45px 20px 70px;
+        }
+
+        .application-container {
+            width: min(850px, 100%);
+            margin: 0 auto;
+        }
+
+        .application-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .application-header h1 {
+            color: var(--navy);
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .application-header h1 strong {
+            color: var(--blue);
+        }
+
+        .application-header p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: var(--navy);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .back-button:hover {
+            color: var(--blue);
+        }
+
+        .application-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label.main-label {
+            display: block;
+            color: var(--navy);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #d00000;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"] {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            outline: none;
+            font-family: "Inter", sans-serif;
+            font-size: 14px;
+            color: var(--dark);
+            transition: 0.2s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--blue);
+        }
+
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            cursor: pointer;
+            color: var(--dark);
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        .radio-option:hover {
+            border-color: var(--blue);
+            background: var(--pale-blue);
+        }
+
+        .radio-option input[type="radio"] {
+            accent-color: var(--blue);
+        }
+
+        .other-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 12px;
+            margin-top: 8px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .other-input:focus {
+            border-color: var(--blue);
+        }
+
+        .submit-application {
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .submit-application:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        /* SUCCESS MESSAGE */
+
+        .application-success {
+            display: none;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        .success-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .application-success h2 {
+            color: var(--navy);
+            font-family: "Plus Jakarta Sans", sans-serif;
+            margin-bottom: 10px;
+        }
+
+        .application-success p {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .application-success strong {
+            color: var(--navy);
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            .application-page {
+                padding: 30px 15px 50px;
+            }
+
+            .application-card {
+                padding: 22px;
+            }
+
+            .application-header h1 {
+                font-size: 27px;
+            }
+
+            .radio-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="application-page">
+
+        <div class="application-container">
+
+            <!-- BACK -->
+
+            <a href="index.html" class="back-button">
+                ← Back to Elviq's Academy
+            </a>
+
+
+            <!-- HEADER -->
+
+            <div class="application-header">
+
+                <div class="eyebrow">
+                    <span></span>
+                    ELVIQ'S ACADEMY · APPLICATION
+                </div>
+
+                <h1>
+                    Internship <strong>Application</strong>
+                </h1>
+
+                <p>
+                    Fill in the details below to apply for an
+                    internship opportunity at Elviq's Academy.
+                </p>
+
+            </div>
+
+
+            <!-- APPLICATION CARD -->
+
+            <div class="application-card">
+
+                <!-- FORM -->
+
+                <form id="applicationForm">
+
+
+                    <!-- 1. FULL NAME -->
+
+                    <div class="form-group">
+
+                        <label class="main-label" for="fullName">
+                            1. Full Name <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- 2. EMAIL -->
+
+                    <div class="form-group">
+
+                        <label class="main-label" for="email">
+                            2. Email <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- 3. MOBILE -->
+
+                    <div class="form-group">
+
+                        <label class="main-label" for="mobile">
+                            3. Mobile Number / WhatsApp Number
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="mobile"
+                            name="mobile"
+                            placeholder="Enter your mobile / WhatsApp number"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- 4. COLLEGE -->
+
+                    <div class="form-group">
+
+                        <label class="main-label" for="college">
+                            4. College / Institute Name
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="college"
+                            name="college"
+                            placeholder="Enter your college / institute name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- 5. CITY / STATE -->
+
+                    <div class="form-group">
+
+                        <label class="main-label" for="cityState">
+                            5. City / State
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="cityState"
+                            name="cityState"
+                            placeholder="Example: Madanapalle, Andhra Pradesh"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- 6. EDUCATION -->
+
+                    <div class="form-group">
+
+                        <label class="main-label">
+                            6. Education <span class="required">*</span>
+                        </label>
+
+                        <div class="radio-group">
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="education"
+                                    value="Undergraduate"
+                                    required
+                                >
+                                Undergraduate
+                            </label>
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="education"
+                                    value="Postgraduate"
+                                >
+                                Postgraduate
+                            </label>
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="education"
+                                    value="Other"
+                                    id="educationOther"
+                                >
+                                Other
+                            </label>
+
+                        </div>
+
+                        <input
+                            type="text"
+                            name="educationOther"
+                            id="educationOtherText"
+                            class="other-input"
+                            placeholder="If Other, specify"
+                            style="display:none;"
+                        >
+
+                    </div>
+
+
+                    <!-- 7. YEAR OF STUDY -->
+
+                    <div class="form-group">
+
+                        <label class="main-label">
+                            7. Year of Study <span class="required">*</span>
+                        </label>
+
+                        <div class="radio-group">
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="yearStudy"
+                                    value="1st Year"
+                                    required
+                                >
+                                1st Year
+                            </label>
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="yearStudy"
+                                    value="2nd Year"
+                                >
+                                2nd Year
+                            </label>
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="yearStudy"
+                                    value="3rd Year"
+                                >
+                                3rd Year
+                            </label>
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="yearStudy"
+                                    value="4th Year"
+                                >
+                                4th Year
+                            </label>
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="yearStudy"
+                                    value="Other"
+                                    id="yearOther"
+                                >
+                                Other
+                            </label>
+
+                        </div>
+
+                        <input
+                            type="text"
+                            name="yearOther"
+                            id="yearOtherText"
+                            class="other-input"
+                            placeholder="If Other, specify"
+                            style="display:none;"
+                        >
+
+                    </div>
+
+
+                    <!-- 8. BRANCH -->
+
+                    <div class="form-group">
+
+                        <label class="main-label" for="branch">
+                            8. Branch / Specialization
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="branch"
+                            name="branch"
+                            placeholder="Example: Computer Science & Engineering"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- 9. INTERNSHIP DOMAIN -->
+
+                    <div class="form-group">
+
+                        <label class="main-label">
+                            9. Internship Domain
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="radio-group">
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="internshipDomain"
+                                    value="Data Analytics"
+                                    required
+                                >
+                                Data Analytics
+                            </label>
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="internshipDomain"
+                                    value="Data Science"
+                                >
+                                Data Science
+                            </label>
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="internshipDomain"
+                                    value="Full Stack Development"
+                                >
+                                Full Stack Development
+                            </label>
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="internshipDomain"
+                                    value="Java Development"
+                                >
+                                Java Development
+                            </label>
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="internshipDomain"
+                                    value="Python Development"
+                                >
+                                Python Development
+                            </label>
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="internshipDomain"
+                                    value="Generative AI"
+                                >
+                                Generative AI
+                            </label>
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="internshipDomain"
+                                    value="AI & ML"
+                                >
+                                AI & ML
+                            </label>
+
+                            <label class="radio-option">
+                                <input
+                                    type="radio"
+                                    name="internshipDomain"
+                                    value="Business Intelligence"
+                                >
+                                Business Intelligence
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        class="button primary-button submit-application"
+                        id="submitApplication"
+                    >
+                        Submit Application →
+                    </button>
+
+                </form>
+
+
+                <!-- SUCCESS MESSAGE -->
+
+                <div
+                    class="application-success"
+                    id="applicationSuccess"
+                >
+
+                    <div class="success-icon">
+                        ✅
+                    </div>
+
+                    <h2>
+                        Application Submitted Successfully!
+                    </h2>
+
+                    <p>
+                        Thank you for applying to
+                        <strong>Elviq's Academy</strong>.
+                    </p>
+
+                    <p>
+                        Your application has been received successfully.
+                    </p>
+
+                    <p>
+                        Further Process will communicate through mail.
+                    </p>
+
+                    <a
+                        href="index.html"
+                        class="button secondary-button"
+                    >
+                        ← Back to Website
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        /* ==========================================
+           GOOGLE APPS SCRIPT WEB APP
+        ========================================== */
+
+        const GOOGLE_SCRIPT_URL =
+            "https://script.google.com/macros/s/AKfycbyxqv88VRN7eRLi556LvWjDHl9v8hvL8uLIgf-HXrLnlOHf_0QjzqRWIdsOodmUdegP/exec";
+
+
+        /* ==========================================
+           EDUCATION - OTHER
+        ========================================== */
+
+        const educationRadios =
+            document.querySelectorAll(
+                'input[name="education"]'
+            );
+
+        const educationOtherText =
+            document.getElementById(
+                "educationOtherText"
+            );
+
+        educationRadios.forEach(radio => {
+
+            radio.addEventListener("change", function () {
+
+                if (this.value === "Other") {
+
+                    educationOtherText.style.display = "block";
+                    educationOtherText.required = true;
+
+                } else {
+
+                    educationOtherText.style.display = "none";
+                    educationOtherText.required = false;
+                    educationOtherText.value = "";
+
+                }
+
+            });
+
+        });
+
+
+        /* ==========================================
+           YEAR - OTHER
+        ========================================== */
+
+        const yearRadios =
+            document.querySelectorAll(
+                'input[name="yearStudy"]'
+            );
+
+        const yearOtherText =
+            document.getElementById(
+                "yearOtherText"
+            );
+
+        yearRadios.forEach(radio => {
+
+            radio.addEventListener("change", function () {
+
+                if (this.value === "Other") {
+
+                    yearOtherText.style.display = "block";
+                    yearOtherText.required = true;
+
+                } else {
+
+                    yearOtherText.style.display = "none";
+                    yearOtherText.required = false;
+                    yearOtherText.value = "";
+
+                }
+
+            });
+
+        });
+
+
+        /* ==========================================
+           APPLICATION SUBMISSION
+        ========================================== */
+
+        const applicationForm =
+            document.getElementById(
+                "applicationForm"
+            );
+
+        const submitButton =
+            document.getElementById(
+                "submitApplication"
+            );
+
+        const successMessage =
+            document.getElementById(
+                "applicationSuccess"
+            );
+
+
+        applicationForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                submitButton.disabled = true;
+
+                submitButton.textContent =
+                    "Submitting Application...";
+
+
+                try {
+
+                    const formData =
+                        new FormData(applicationForm);
+
+
+                    /*
+                     * If "Other" is selected,
+                     * save the text entered by the applicant.
+                     */
+
+                    if (
+                        formData.get("education") === "Other"
+                    ) {
+
+                        formData.set(
+                            "education",
+                            "Other: " +
+                            formData.get("educationOther")
+                        );
+
+                    }
+
+
+                    if (
+                        formData.get("yearStudy") === "Other"
+                    ) {
+
+                        formData.set(
+                            "yearStudy",
+                            "Other: " +
+                            formData.get("yearOther")
+                        );
+
+                    }
+
+
+                    /*
+                     * Send data to Google Apps Script.
+                     */
+
+                    await fetch(
+                        GOOGLE_SCRIPT_URL,
+                        {
+                            method: "POST",
+                            body: formData,
+                            mode: "no-cors"
+                        }
+                    );
+
+
+                    /*
+                     * Show success message.
+                     */
+
+                    applicationForm.style.display =
+                        "none";
+
+                    successMessage.style.display =
+                        "block";
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Application submission error:",
+                        error
+                    );
+
+                    alert(
+                        "Unable to submit the application. Please try again."
+                    );
+
+                    submitButton.disabled = false;
+
+                    submitButton.textContent =
+                        "Submit Application →";
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
