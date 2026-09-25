@@ -1282,7 +1282,7 @@ footer {
 .sample-link-container {
     display: flex;
     justify-content: center;
-    margin-top: 35px;
+    margin-top: 35px solid black;
 }
 /* =====================================================
    FEEDBACK SECTION
@@ -1293,17 +1293,17 @@ footer {
 }
 
 .feedback-card {
-    width: min(700px, 100%);
-    margin: 0 auto;
-    padding: 35px;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    box-shadow: var(--shadow);
+    width:min(620px,100%);
+    margin:0 auto;
+    padding:25px 30px;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:var(--shadow);
 }
 
 .feedback-field {
-    margin-bottom: 20px;
+    margin-bottom:14px;
 }
 
 .feedback-field label {
@@ -1369,5 +1369,76 @@ footer {
 @media (max-width: 600px) {
     .contact-buttons {
         grid-template-columns: 1fr;
+    }
+}
+/* =========================
+   SAMPLE FEEDBACK
+========================= */
+
+.sample-feedback-heading {
+    text-align: center;
+    margin-top: 55px;
+    margin-bottom: 25px;
+}
+
+.sample-feedback-heading h3 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: var(--navy);
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.sample-feedback-heading p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.feedback-list {
+    width: min(900px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.feedback-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.feedback-stars {
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.feedback-item p {
+    color: var(--dark);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.feedback-item strong {
+    color: var(--navy);
+    font-size: 13px;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+
+    .feedback-list {
+        grid-template-columns: 1fr;
+    }
+
+    .feedback-card {
+        padding: 20px;
+    }
+
+    .sample-feedback-heading {
+        margin-top: 40px;
     }
 }

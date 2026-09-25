@@ -263,3 +263,55 @@ document.querySelectorAll("[data-instagram]").forEach(button => {
     });
 
 });
+/* =====================================================
+   FEEDBACK FORM
+   Clear form after successful submission
+===================================================== */
+
+const feedbackForm = document.querySelector("#feedback form");
+
+if (feedbackForm) {
+    feedbackForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const submitButton = feedbackForm.querySelector(".feedback-submit");
+        const originalText = submitButton.textContent;
+
+        submitButton.textContent = "Submitting...";
+        submitButton.disabled = true;
+
+        try {
+            const formData = new FormData(feedbackForm);
+
+            const response = await fetch(feedbackForm.action, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "Accept": "application/json"
+                }
+            });
+
+            if (response.ok) {
+                feedbackForm.reset();
+
+                submitButton.textContent = "Feedback Submitted ✓";
+
+                setTimeout(() => {
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                }, 2500);
+
+            } else {
+                throw new Error("Submission failed");
+            }
+
+        } catch (error) {
+            console.error("Feedback submission error:", error);
+
+            submitButton.textContent = "Try Again";
+            submitButton.disabled = false;
+
+            alert("Unable to submit feedback. Please try again.");
+        }
+    });
+}
