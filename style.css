@@ -1348,3 +1348,26 @@ footer {
     }
 
 }
+/* =========================
+   CONTACT BUTTONS - 2 x 2
+========================= */
+
+.contact-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.contact-button {
+    width: 100%;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .contact-buttons {
+        grid-template-columns: 1fr;
+    }
+}
