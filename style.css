@@ -1284,3 +1284,67 @@ footer {
     justify-content: center;
     margin-top: 35px;
 }
+/* =====================================================
+   FEEDBACK SECTION
+   ===================================================== */
+
+.feedback-section {
+    background: var(--pale-blue);
+}
+
+.feedback-card {
+    width: min(700px, 100%);
+    margin: 0 auto;
+    padding: 35px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+}
+
+.feedback-field {
+    margin-bottom: 20px;
+}
+
+.feedback-field label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.feedback-field input,
+.feedback-field textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    color: var(--dark);
+    outline: none;
+    transition: 0.25s;
+}
+
+.feedback-field input:focus,
+.feedback-field textarea:focus {
+    border-color: var(--blue);
+}
+
+.feedback-field textarea {
+    resize: vertical;
+}
+
+.feedback-submit {
+    border: 0;
+    margin-top: 5px;
+}
+
+@media (max-width: 760px) {
+
+    .feedback-card {
+        padding: 22px;
+    }
+
+}
