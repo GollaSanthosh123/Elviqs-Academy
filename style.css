@@ -1452,3 +1452,54 @@ footer {
         margin-top: 40px;
     }
 }
+.aptitude-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+.aptitude-buttons .button {
+    min-width: 180px;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .aptitude-buttons {
+        flex-direction: column;
+    }
+
+    .aptitude-buttons .button {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+/* Aptitude Challenge Buttons */
+
+.aptitude-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.aptitude-buttons .button {
+    min-width: 180px;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+
+    .aptitude-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .aptitude-buttons .button {
+        width: 100%;
+    }
+
+}

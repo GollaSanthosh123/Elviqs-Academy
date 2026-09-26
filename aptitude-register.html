@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aptitude Challenge Registration | Elviq's Academy</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* =========================
+           BODY
+        ========================== */
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5fbff;
+            color: #082f6b;
+            min-height: 100vh;
+            padding: 35px 20px 60px;
+        }
+
+
+        /* =========================
+           BACK BUTTON
+        ========================== */
+
+        .back-button {
+            display: inline-block;
+            margin: 0 0 45px 30px;
+
+            color: #063b82;
+            text-decoration: none;
+
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .back-button:hover {
+            color: #0b78d0;
+        }
+
+
+        /* =========================
+           PAGE HEADER
+        ========================== */
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 12px;
+
+            color: #0875c9;
+
+            font-size: 20px;
+            font-weight: 800;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .eyebrow span {
+            width: 36px;
+            height: 4px;
+
+            background: #16a8df;
+
+            display: inline-block;
+        }
+
+
+        .page-header h1 {
+            font-size: 52px;
+            line-height: 1.15;
+
+            color: #0a316d;
+
+            margin-bottom: 25px;
+        }
+
+
+        .page-header h1 strong {
+            color: #0878cf;
+        }
+
+
+        .page-header p {
+            font-size: 20px;
+            color: #111;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           FORM CARD
+        ========================== */
+
+        .card {
+            width: 100%;
+            max-width: 1280px;
+
+            margin: 0 auto;
+
+            background: #ffffff;
+
+            padding: 55px;
+
+            border-radius: 30px;
+
+            border: 1px solid #d7e6f2;
+
+            box-shadow:
+                0 10px 35px rgba(0, 70, 130, 0.08);
+        }
+
+
+        /* =========================
+           FORM
+        ========================== */
+
+        #aptitudeRegistrationForm {
+            width: 100%;
+        }
+
+
+        .field {
+            width: 100%;
+            margin-bottom: 28px;
+        }
+
+
+        .field label {
+            display: block;
+            width: 100%;
+
+            margin-bottom: 12px;
+
+            color: #073b7c;
+
+            font-size: 20px;
+            font-weight: 700;
+
+            line-height: 1.4;
+        }
+
+
+        .field input {
+            display: block;
+
+            width: 100%;
+            height: 64px;
+
+            padding: 15px 20px;
+
+            border: 1px solid #d4e2ef;
+
+            border-radius: 12px;
+
+            background: #ffffff;
+
+            color: #222;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 18px;
+
+            transition: 0.2s ease;
+        }
+
+
+        .field input:focus {
+            outline: none;
+
+            border-color: #0878cf;
+
+            box-shadow:
+                0 0 0 3px rgba(8, 120, 207, 0.10);
+        }
+
+
+        .field input::placeholder {
+            color: #777;
+        }
+
+
+        /* =========================
+           SUBMIT BUTTON
+        ========================== */
+
+        .submit-btn {
+            display: block;
+
+            width: 100%;
+            height: 60px;
+
+            margin-top: 10px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #0878cf;
+
+            color: #ffffff;
+
+            font-size: 18px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+
+        .submit-btn:hover {
+            background: #0667b2;
+        }
+
+
+        .submit-btn:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+
+        /* =========================
+           ERROR MESSAGE
+        ========================== */
+
+        .error {
+            display: none;
+
+            margin-top: 18px;
+            padding: 14px;
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+
+            border-radius: 8px;
+
+            text-align: center;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           SUCCESS MESSAGE
+        ========================== */
+
+        .success {
+            display: none;
+
+            text-align: center;
+
+            padding: 20px 10px;
+        }
+
+
+        .success h2 {
+            color: #16a34a;
+
+            font-size: 32px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .success > p {
+            color: #222;
+
+            font-size: 18px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           PASSKEY BOX
+        ========================== */
+
+        .passkey-box {
+            margin: 30px auto;
+
+            padding: 25px;
+
+            max-width: 700px;
+
+            background: #f0fdf4;
+
+            border: 2px dashed #16a34a;
+
+            border-radius: 12px;
+        }
+
+
+        .passkey-label {
+            color: #222;
+
+            font-size: 20px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .passkey {
+            display: inline-block;
+
+            padding: 8px 18px;
+
+            background: #2563eb;
+
+            color: #ffffff;
+
+            border-radius: 5px;
+
+            font-size: 32px;
+
+            font-weight: bold;
+
+            letter-spacing: 4px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 768px) {
+
+            body {
+                padding: 25px 15px 45px;
+            }
+
+
+            .back-button {
+                margin-left: 5px;
+
+                margin-bottom: 35px;
+
+                font-size: 17px;
+            }
+
+
+            .page-header {
+                margin-bottom: 35px;
+            }
+
+
+            .eyebrow {
+                font-size: 14px;
+
+                letter-spacing: 2px;
+
+                gap: 8px;
+
+                margin-bottom: 25px;
+            }
+
+
+            .eyebrow span {
+                width: 25px;
+
+                height: 3px;
+            }
+
+
+            .page-header h1 {
+                font-size: 34px;
+            }
+
+
+            .page-header p {
+                font-size: 16px;
+            }
+
+
+            .card {
+                padding: 30px 20px;
+
+                border-radius: 20px;
+            }
+
+
+            .field label {
+                font-size: 17px;
+            }
+
+
+            .field input {
+                height: 55px;
+
+                padding: 13px 15px;
+
+                font-size: 16px;
+            }
+
+
+            .submit-btn {
+                height: 55px;
+
+                font-size: 16px;
+            }
+
+
+            .success h2 {
+                font-size: 27px;
+            }
+
+
+            .passkey {
+                font-size: 25px;
+
+                letter-spacing: 3px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         BACK TO HOME
+    ========================== -->
+
+    <a
+        href="index.html"
+        class="back-button">
+
+        ← Back to Elviq's Academy
+
+    </a>
+
+
+    <!-- =========================
+         PAGE HEADER
+    ========================== -->
+
+    <div class="page-header">
+
+
+        <div class="eyebrow">
+
+            <span></span>
+
+            ELVIQ'S ACADEMY · APTITUDE CHALLENGE
+
+        </div>
+
+
+        <h1>
+
+            Aptitude
+            <strong>Challenge Registration</strong>
+
+        </h1>
+
+
+        <p>
+
+            Fill in the details below to enroll for the
+            Elviq's Academy Aptitude Challenge.
+
+        </p>
+
+
+    </div>
+
+
+    <!-- =========================
+         FORM CARD
+    ========================== -->
+
+    <div class="card">
+
+
+        <!-- =========================
+             REGISTRATION FORM
+        ========================== -->
+
+        <form
+            id="aptitudeRegistrationForm">
+
+
+            <!-- 1. FULL NAME -->
+
+            <div class="field">
+
+                <label>
+                    1. Full Name *
+                </label>
+
+                <input
+                    type="text"
+                    name="fullName"
+                    required
+                    placeholder="Enter your full name">
+
+            </div>
+
+
+            <!-- 2. EMAIL -->
+
+            <div class="field">
+
+                <label>
+                    2. Email *
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="Enter your email address">
+
+            </div>
+
+
+            <!-- 3. MOBILE -->
+
+            <div class="field">
+
+                <label>
+                    3. Mobile Number / WhatsApp Number *
+                </label>
+
+                <input
+                    type="tel"
+                    name="mobile"
+                    required
+                    placeholder="Enter your mobile / WhatsApp number">
+
+            </div>
+
+
+            <!-- 4. COLLEGE -->
+
+            <div class="field">
+
+                <label>
+                    4. College / Institute Name *
+                </label>
+
+                <input
+                    type="text"
+                    name="college"
+                    required
+                    placeholder="Enter your college / institute name">
+
+            </div>
+
+
+            <!-- 5. CITY / STATE -->
+
+            <div class="field">
+
+                <label>
+                    5. City / State *
+                </label>
+
+                <input
+                    type="text"
+                    name="cityState"
+                    required
+                    placeholder="Example: Madanapalle, Andhra Pradesh">
+
+            </div>
+
+
+            <!-- 6. EDUCATION -->
+
+            <div class="field">
+
+                <label>
+                    6. Education *
+                </label>
+
+                <input
+                    type="text"
+                    name="education"
+                    required
+                    placeholder="Example: B.Tech">
+
+            </div>
+
+
+            <!-- 7. YEAR OF STUDY -->
+
+            <div class="field">
+
+                <label>
+                    7. Year of Study *
+                </label>
+
+                <input
+                    type="text"
+                    name="yearStudy"
+                    required
+                    placeholder="Example: 3rd Year">
+
+            </div>
+
+
+            <!-- 8. BRANCH -->
+
+            <div class="field">
+
+                <label>
+                    8. Branch / Specialization *
+                </label>
+
+                <input
+                    type="text"
+                    name="branch"
+                    required
+                    placeholder="Example: CSE - Data Science">
+
+            </div>
+
+
+            <!-- =========================
+                 SUBMIT
+            ========================== -->
+
+            <button
+                type="submit"
+                class="submit-btn"
+                id="submitBtn">
+
+                Enroll for Aptitude Challenge
+
+            </button>
+
+
+            <!-- ERROR -->
+
+            <div
+                class="error"
+                id="errorMessage">
+            </div>
+
+
+        </form>
+
+
+        <!-- =========================
+             SUCCESS
+        ========================== -->
+
+        <div
+            class="success"
+            id="successMessage">
+
+
+            <h2>
+                Registration Successful! ✓
+            </h2>
+
+
+            <p>
+
+                Thank you for enrolling in the
+                Elviq's Academy Aptitude Challenge.
+
+            </p>
+
+
+            <div class="passkey-box">
+
+
+                <div class="passkey-label">
+
+                    Your Test Passkey
+
+                </div>
+
+
+                <div
+                    class="passkey"
+                    id="passkey">
+
+                </div>
+
+
+            </div>
+
+
+            <p>
+
+                Please save this passkey.
+                You will need it to enter the test.
+
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+
+        const GOOGLE_SCRIPT_URL =
+            "https://script.google.com/macros/s/AKfycbzSl7e3zdRJWWqQCgvRkkgluu1uGs07SxlbP_jtRsS6JXoj6iYN8lDXPTDEp-k9aHXH/exec";
+
+
+        const registrationForm =
+            document.getElementById(
+                "aptitudeRegistrationForm"
+            );
+
+
+        const submitBtn =
+            document.getElementById(
+                "submitBtn"
+            );
+
+
+        const successMessage =
+            document.getElementById(
+                "successMessage"
+            );
+
+
+        const errorMessage =
+            document.getElementById(
+                "errorMessage"
+            );
+
+
+        const passkey =
+            document.getElementById(
+                "passkey"
+            );
+
+
+        /* =========================
+           FORM SUBMISSION
+        ========================== */
+
+        registrationForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                submitBtn.disabled = true;
+
+
+                submitBtn.textContent =
+                    "Registering...";
+
+
+                errorMessage.style.display =
+                    "none";
+
+
+                try {
+
+
+                    const formData =
+                        new FormData(
+                            registrationForm
+                        );
+
+
+                    const response =
+                        await fetch(
+                            GOOGLE_SCRIPT_URL,
+                            {
+                                method: "POST",
+                                body: formData
+                            }
+                        );
+
+
+                    const result =
+                        await response.json();
+
+
+                    if (!result.success) {
+
+                        throw new Error(
+                            result.message ||
+                            "Registration failed."
+                        );
+
+                    }
+
+
+                    /* =====================
+                       SHOW PASSKEY
+                    ====================== */
+
+                    passkey.textContent =
+                        result.data.passkey;
+
+
+                    /* =====================
+                       HIDE FORM
+                    ====================== */
+
+                    registrationForm.style.display =
+                        "none";
+
+
+                    /* =====================
+                       SHOW SUCCESS
+                    ====================== */
+
+                    successMessage.style.display =
+                        "block";
+
+
+                }
+
+                catch (error) {
+
+
+                    console.error(
+                        "Registration error:",
+                        error
+                    );
+
+
+                    errorMessage.textContent =
+                        "Unable to register. Please try again.";
+
+
+                    errorMessage.style.display =
+                        "block";
+
+
+                    submitBtn.disabled =
+                        false;
+
+
+                    submitBtn.textContent =
+                        "Enroll for Aptitude Challenge";
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+</html>

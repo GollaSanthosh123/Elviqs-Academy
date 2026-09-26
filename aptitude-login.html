@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Start Aptitude Test | Elviq's Academy</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5fbff;
+            color: #082f6b;
+
+            min-height: 100vh;
+
+            padding: 35px 20px 60px;
+        }
+
+
+        /* =========================
+           BACK BUTTON
+        ========================== */
+
+        .back-button {
+
+            display: inline-block;
+
+            margin: 0 0 45px 30px;
+
+            color: #063b82;
+
+            text-decoration: none;
+
+            font-size: 20px;
+
+            font-weight: 700;
+        }
+
+
+        .back-button:hover {
+            color: #0b78d0;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .page-header {
+
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+
+        .eyebrow {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            color: #0875c9;
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .eyebrow span {
+
+            width: 36px;
+
+            height: 4px;
+
+            background: #16a8df;
+
+            display: inline-block;
+        }
+
+
+        .page-header h1 {
+
+            font-size: 52px;
+
+            line-height: 1.15;
+
+            color: #0a316d;
+
+            margin-bottom: 20px;
+        }
+
+
+        .page-header h1 strong {
+
+            color: #0878cf;
+        }
+
+
+        .page-header p {
+
+            font-size: 19px;
+
+            color: #111;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           LOGIN CARD
+        ========================== */
+
+        .login-card {
+
+            width: 100%;
+
+            max-width: 700px;
+
+            margin: 0 auto;
+
+            background: #ffffff;
+
+            padding: 50px;
+
+            border-radius: 25px;
+
+            border: 1px solid #d7e6f2;
+
+            box-shadow:
+                0 10px 35px rgba(0, 70, 130, 0.08);
+        }
+
+
+        /* =========================
+           FIELDS
+        ========================== */
+
+        .field {
+
+            margin-bottom: 25px;
+        }
+
+
+        .field label {
+
+            display: block;
+
+            margin-bottom: 10px;
+
+            color: #073b7c;
+
+            font-size: 18px;
+
+            font-weight: 700;
+        }
+
+
+        .field input {
+
+            width: 100%;
+
+            height: 60px;
+
+            padding: 15px 18px;
+
+            border: 1px solid #d4e2ef;
+
+            border-radius: 10px;
+
+            font-size: 17px;
+
+            color: #222;
+
+            background: #ffffff;
+        }
+
+
+        .field input:focus {
+
+            outline: none;
+
+            border-color: #0878cf;
+
+            box-shadow:
+                0 0 0 3px rgba(8, 120, 207, 0.10);
+        }
+
+
+        /* =========================
+           LOGIN BUTTON
+        ========================== */
+
+        .login-btn {
+
+            width: 100%;
+
+            height: 60px;
+
+            margin-top: 5px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #0878cf;
+
+            color: #ffffff;
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .login-btn:hover {
+
+            background: #0667b2;
+        }
+
+
+        .login-btn:disabled {
+
+            background: #999;
+
+            cursor: not-allowed;
+        }
+
+
+        /* =========================
+           ERROR
+        ========================== */
+
+        .error {
+
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            border-radius: 8px;
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+
+            text-align: center;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           INFO
+        ========================== */
+
+        .info {
+
+            margin-top: 25px;
+
+            padding: 18px;
+
+            background: #eff6ff;
+
+            border-radius: 10px;
+
+            color: #174a7c;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+
+            text-align: center;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 768px) {
+
+            body {
+
+                padding: 25px 15px 45px;
+            }
+
+
+            .back-button {
+
+                margin-left: 5px;
+
+                margin-bottom: 35px;
+
+                font-size: 17px;
+            }
+
+
+            .eyebrow {
+
+                font-size: 14px;
+
+                letter-spacing: 2px;
+
+                gap: 8px;
+            }
+
+
+            .eyebrow span {
+
+                width: 25px;
+
+                height: 3px;
+            }
+
+
+            .page-header h1 {
+
+                font-size: 35px;
+            }
+
+
+            .page-header p {
+
+                font-size: 16px;
+            }
+
+
+            .login-card {
+
+                padding: 30px 20px;
+
+                border-radius: 20px;
+            }
+
+
+            .field label {
+
+                font-size: 16px;
+            }
+
+
+            .field input {
+
+                height: 55px;
+
+                font-size: 16px;
+            }
+
+
+            .login-btn {
+
+                height: 55px;
+
+                font-size: 16px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         BACK BUTTON
+    ========================== -->
+
+    <a
+        href="index.html"
+        class="back-button">
+
+        ← Back to Elviq's Academy
+
+    </a>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <div class="page-header">
+
+
+        <div class="eyebrow">
+
+            <span></span>
+
+            ELVIQ'S ACADEMY · APTITUDE CHALLENGE
+
+        </div>
+
+
+        <h1>
+
+            Start <strong>Aptitude Test</strong>
+
+        </h1>
+
+
+        <p>
+
+            Enter your registered details and passkey
+            to access the aptitude challenge.
+
+        </p>
+
+
+    </div>
+
+
+    <!-- =========================
+         LOGIN CARD
+    ========================== -->
+
+    <div class="login-card">
+
+
+        <form id="aptitudeLoginForm">
+
+
+            <!-- NAME -->
+
+            <div class="field">
+
+                <label>
+                    Full Name *
+                </label>
+
+                <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    required
+                    autocomplete="name"
+                    placeholder="Enter your registered full name">
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="field">
+
+                <label>
+                    Email *
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    autocomplete="email"
+                    placeholder="Enter your registered email">
+
+            </div>
+
+
+            <!-- PASSKEY -->
+
+            <div class="field">
+
+                <label>
+                    Test Passkey *
+                </label>
+
+                <input
+                    type="text"
+                    id="passkey"
+                    name="passkey"
+                    required
+                    autocomplete="off"
+                    placeholder="Enter your test passkey">
+
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <button
+                type="submit"
+                id="loginBtn"
+                class="login-btn">
+
+                Enter Test
+
+            </button>
+
+
+            <!-- ERROR -->
+
+            <div
+                id="errorMessage"
+                class="error">
+            </div>
+
+
+        </form>
+
+
+        <!-- INFORMATION -->
+
+        <div class="info">
+
+            Use the same name and email address
+            you entered during registration.
+
+            <br>
+
+            Enter the passkey provided after registration.
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+
+        const GOOGLE_SCRIPT_URL =
+            "https://script.google.com/macros/s/AKfycbzSl7e3zdRJWWqQCgvRkkgluu1uGs07SxlbP_jtRsS6JXoj6iYN8lDXPTDEp-k9aHXH/exec";
+
+
+        const loginForm =
+            document.getElementById(
+                "aptitudeLoginForm"
+            );
+
+
+        const loginBtn =
+            document.getElementById(
+                "loginBtn"
+            );
+
+
+        const errorMessage =
+            document.getElementById(
+                "errorMessage"
+            );
+
+
+        loginForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                loginBtn.disabled = true;
+
+                loginBtn.textContent =
+                    "Verifying...";
+
+
+                errorMessage.style.display =
+                    "none";
+
+
+                try {
+
+
+                    const formData =
+                        new FormData();
+
+
+                    formData.append(
+                        "action",
+                        "login"
+                    );
+
+
+                    formData.append(
+                        "fullName",
+                        document.getElementById(
+                            "fullName"
+                        ).value.trim()
+                    );
+
+
+                    formData.append(
+                        "email",
+                        document.getElementById(
+                            "email"
+                        ).value.trim()
+                    );
+
+
+                    formData.append(
+                        "passkey",
+                        document.getElementById(
+                            "passkey"
+                        ).value.trim()
+                    );
+
+
+                    const response =
+                        await fetch(
+                            GOOGLE_SCRIPT_URL,
+                            {
+                                method: "POST",
+                                body: formData
+                            }
+                        );
+
+
+                    const result =
+                        await response.json();
+
+
+                    if (!result.success) {
+
+                        throw new Error(
+                            result.message ||
+                            "Invalid login details."
+                        );
+
+                    }
+
+
+                    /*
+                     * TEMPORARY SUCCESS
+                     *
+                     * We will replace this with
+                     * aptitude-test.html later.
+                     */
+
+                    sessionStorage.setItem(
+    "aptitudeParticipant",
+    JSON.stringify(result.data)
+);
+
+window.location.href = "aptitude-test.html";
+
+
+                    loginBtn.disabled =
+                        false;
+
+                    loginBtn.textContent =
+                        "Enter Test";
+
+
+                }
+
+                catch (error) {
+
+
+                    console.error(
+                        "Login error:",
+                        error
+                    );
+
+
+                    errorMessage.textContent =
+                        error.message ||
+                        "Unable to verify your details.";
+
+
+                    errorMessage.style.display =
+                        "block";
+
+
+                    loginBtn.disabled =
+                        false;
+
+
+                    loginBtn.textContent =
+                        "Enter Test";
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+</html>
