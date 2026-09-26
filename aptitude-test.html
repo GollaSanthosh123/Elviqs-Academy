@@ -270,6 +270,22 @@
             display: none !important;
         }
 
+        .schedule-message {
+            margin: 18px 0;
+            padding: 14px 16px;
+            border-radius: 9px;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1d4ed8;
+            font-weight: 600;
+        }
+
+        .schedule-message.closed {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: #dc2626;
+        }
+
         .fullscreen-message {
             text-align: center;
             margin-bottom: 20px;
@@ -335,7 +351,7 @@
         </div>
 
         <div id="timer" class="timer">
-            30:00
+            Loading...
         </div>
     </header>
 
@@ -345,7 +361,7 @@
         <!-- START SCREEN -->
         <section id="startScreen" class="start-screen">
 
-            <h1>Aptitude Challenge</h1>
+            <h1 id="challengeTitle">Aptitude Challenge</h1>
 
             <p>
                 Welcome to the Elviq's Academy Aptitude Challenge.
@@ -357,10 +373,10 @@
                 <h3>Test Instructions</h3>
 
                 <ul>
-                    <li>Total Questions: <strong>30</strong></li>
-                    <li>Duration: <strong>30 minutes</strong></li>
-                    <li>Each question carries <strong>1 mark</strong>.</li>
-                    <li>Total Marks: <strong>30</strong></li>
+                    <li>Total Questions: <strong id="totalQuestionsText">Loading...</strong></li>
+                    <li>Duration: <strong id="durationText">Loading...</strong></li>
+                    <li>Each question carries <strong id="marksText">Loading...</strong>.</li>
+                    <li>Total Marks: <strong id="totalMarksText">Loading...</strong></li>
                     <li>Only one option can be selected for each question.</li>
                     <li>The timer will start when you enter the test.</li>
                     <li>Switching tabs will generate a warning.</li>
@@ -370,15 +386,19 @@
 
             </div>
 
+            <div id="scheduleMessage" class="schedule-message hidden"></div>
+
             <p class="fullscreen-message">
                 The test will open in fullscreen mode.
             </p>
 
             <button
+                id="startTestButton"
                 type="button"
                 class="primary-btn"
-                onclick="startTest()">
-                Enter Fullscreen & Start Test
+                onclick="startTest()"
+                disabled>
+                Loading Test...
             </button>
 
         </section>
@@ -516,190 +536,14 @@
         // QUESTIONS
         // ------------------------------------------
 
-        const questions = [
+        let questions = [];
 
-            {
-                question: "If the cost of 5 pens is ₹100, what is the cost of 8 pens?",
-                options: ["₹120", "₹140", "₹160", "₹180"],
-                answer: 2
-            },
-
-            {
-                question: "A number is increased from 200 to 250. What is the percentage increase?",
-                options: ["20%", "25%", "30%", "35%"],
-                answer: 1
-            },
-
-            {
-                question: "The average of 10, 20, 30, 40 and 50 is:",
-                options: ["20", "25", "30", "35"],
-                answer: 2
-            },
-
-            {
-                question: "A car travels 240 km in 4 hours. What is its average speed?",
-                options: ["50 km/h", "60 km/h", "70 km/h", "80 km/h"],
-                answer: 1
-            },
-
-            {
-                question: "If 3 workers complete a task in 12 days, how many days will 6 workers take, assuming equal efficiency?",
-                options: ["3 days", "4 days", "6 days", "8 days"],
-                answer: 2
-            },
-
-            {
-                question: "Find the next number: 2, 4, 8, 16, ___",
-                options: ["20", "24", "30", "32"],
-                answer: 3
-            },
-
-            {
-                question: "If x + 15 = 35, what is x?",
-                options: ["10", "15", "20", "25"],
-                answer: 2
-            },
-
-            {
-                question: "A shopkeeper gives a 10% discount on an item marked ₹500. What is the selling price?",
-                options: ["₹400", "₹450", "₹475", "₹490"],
-                answer: 1
-            },
-
-            {
-                question: "A train travels 300 km in 5 hours. Its speed is:",
-                options: ["50 km/h", "60 km/h", "70 km/h", "75 km/h"],
-                answer: 1
-            },
-
-            {
-                question: "What is 25% of 240?",
-                options: ["40", "50", "60", "70"],
-                answer: 2
-            },
-
-            {
-                question: "If 2x = 18, then x is:",
-                options: ["6", "7", "8", "9"],
-                answer: 3
-            },
-
-            {
-                question: "A man buys an article for ₹800 and sells it for ₹960. What is the profit percentage?",
-                options: ["15%", "20%", "25%", "30%"],
-                answer: 1
-            },
-
-            {
-                question: "Find the missing number: 5, 10, 20, 40, ___",
-                options: ["60", "70", "80", "100"],
-                answer: 2
-            },
-
-            {
-                question: "If 12 workers can finish a job in 10 days, how many worker-days are required?",
-                options: ["100", "110", "120", "130"],
-                answer: 2
-            },
-
-            {
-                question: "A person walks at 5 km/h. How far will he travel in 3 hours?",
-                options: ["10 km", "12 km", "15 km", "18 km"],
-                answer: 2
-            },
-
-            {
-                question: "What is the simple interest on ₹1000 at 10% per annum for 2 years?",
-                options: ["₹100", "₹150", "₹200", "₹250"],
-                answer: 2
-            },
-
-            {
-                question: "If 4 notebooks cost ₹120, what is the cost of 7 notebooks?",
-                options: ["₹180", "₹200", "₹210", "₹240"],
-                answer: 2
-            },
-
-            {
-                question: "The ratio of boys to girls is 2:3. If there are 20 boys, how many girls are there?",
-                options: ["25", "30", "35", "40"],
-                answer: 1
-            },
-
-            {
-                question: "A number divided by 5 gives 12. What is the number?",
-                options: ["50", "55", "60", "65"],
-                answer: 2
-            },
-
-            {
-                question: "What is the next number: 3, 6, 9, 12, ___?",
-                options: ["14", "15", "16", "18"],
-                answer: 1
-            },
-
-            {
-                question: "If the selling price is ₹600 and the cost price is ₹500, the profit is:",
-                options: ["₹50", "₹75", "₹100", "₹125"],
-                answer: 2
-            },
-
-            {
-                question: "A class has 40 students. If 25% are absent, how many students are present?",
-                options: ["25", "30", "32", "35"],
-                answer: 1
-            },
-
-            {
-                question: "What is the HCF of 12 and 18?",
-                options: ["3", "6", "9", "12"],
-                answer: 1
-            },
-
-            {
-                question: "What is the LCM of 4 and 6?",
-                options: ["8", "10", "12", "24"],
-                answer: 2
-            },
-
-            {
-                question: "A clock shows 3:00. What is the angle between the hour and minute hands?",
-                options: ["60°", "90°", "120°", "180°"],
-                answer: 1
-            },
-
-            {
-                question: "If today is Monday, what day will it be after 10 days?",
-                options: ["Wednesday", "Thursday", "Friday", "Saturday"],
-                answer: 1
-            },
-
-            {
-                question: "Find the odd one out:",
-                options: ["Apple", "Mango", "Carrot", "Banana"],
-                answer: 2
-            },
-
-            {
-                question: "If CAT is coded as DBU, how is DOG coded?",
-                options: ["EPH", "EOG", "FPH", "DOH"],
-                answer: 0
-            },
-
-            {
-                question: "Complete the series: A, C, E, G, ___",
-                options: ["H", "I", "J", "K"],
-                answer: 1
-            },
-
-            {
-                question: "A father is 40 years old and his son is 10 years old. After how many years will the father be twice as old as his son?",
-                options: ["10", "15", "20", "25"],
-                answer: 2
-            }
-
-        ];
-
+        let challengeId = "";
+        let challengeName = "";
+        let durationMinutes = 0;
+        let marksPerQuestion = 1;
+        let startTime = null;
+        let endTime = null;
 
         // ------------------------------------------
         // TEST VARIABLES
@@ -707,15 +551,17 @@
 
         let currentQuestion = 0;
 
-        let answers = new Array(questions.length).fill(null);
+        let answers = [];
 
-        let timeLeft = 30 * 60;
+        let timeLeft = 0;
 
         let timerInterval = null;
 
         let testStarted = false;
 
         let testSubmitted = false;
+
+        let submissionInProgress = false;
 
         let violationCount = 0;
 
@@ -727,7 +573,155 @@
 
 
         // ------------------------------------------
+        // GOOGLE APPS SCRIPT
+        // ------------------------------------------
+
+        const GOOGLE_SCRIPT_URL =
+            "https://script.google.com/macros/s/AKfycbzSl7e3zdRJWWqQCgvRkkgluu1uGs07SxlbP_jtRsS6JXoj6iYN8lDXPTDEp-k9aHXH/exec";
+
+
+        // ------------------------------------------
+        // LOAD TEST FROM GOOGLE SHEETS
+        // ------------------------------------------
+
+        async function loadTestFromServer() {
+
+            const startButton =
+                document.getElementById("startTestButton");
+
+            const scheduleMessage =
+                document.getElementById("scheduleMessage");
+
+            try {
+
+                startButton.disabled = true;
+                startButton.textContent = "Checking Test Availability...";
+                scheduleMessage.classList.add("hidden");
+                scheduleMessage.classList.remove("closed");
+
+                const formData = new URLSearchParams();
+                formData.append("action", "getTest");
+
+                const response = await fetch(
+                    GOOGLE_SCRIPT_URL,
+                    {
+                        method: "POST",
+                        body: formData
+                    }
+                );
+
+                const result = await response.json();
+
+                if (!result.success) {
+
+                    scheduleMessage.classList.remove("hidden");
+
+                    if (result.code === "NOT_STARTED") {
+                        scheduleMessage.innerHTML =
+                            `⏳ Test has not started yet.<br><br>` +
+                            `Start time: <strong>${formatDateTime(result.data?.startTime)}</strong>`;
+                        startButton.textContent = "Test Not Started";
+                        return;
+                    }
+
+                    if (result.code === "CLOSED") {
+                        scheduleMessage.classList.add("closed");
+                        scheduleMessage.innerHTML =
+                            `🔒 This aptitude test is now closed.<br><br>` +
+                            `The test was available until: <strong>${formatDateTime(result.data?.endTime)}</strong>`;
+                        startButton.textContent = "Test Closed";
+                        return;
+                    }
+
+                    throw new Error(result.message || "Unable to load test.");
+                }
+
+                const testData = result.data;
+
+                challengeId = testData.challengeId || "";
+                challengeName = testData.challengeName || "Aptitude Challenge";
+                durationMinutes = Number(testData.durationMinutes || 30);
+                marksPerQuestion = Number(testData.marksPerQuestion || 1);
+
+                startTime = testData.startTime ? new Date(testData.startTime) : null;
+                endTime = testData.endTime ? new Date(testData.endTime) : null;
+
+                questions = Array.isArray(testData.questions)
+                    ? testData.questions
+                    : [];
+
+                if (questions.length === 0) {
+                    throw new Error("No questions are available for this challenge.");
+                }
+
+                answers = new Array(questions.length).fill(null);
+
+                document.getElementById("challengeTitle").textContent = challengeName;
+                document.querySelector(".test-title").textContent = challengeName;
+                document.getElementById("totalQuestionsText").textContent = questions.length;
+                document.getElementById("durationText").textContent = `${durationMinutes} minutes`;
+                document.getElementById("marksText").textContent =
+                    `${marksPerQuestion} mark${marksPerQuestion === 1 ? "" : "s"}`;
+
+                const totalMarks = questions.reduce(function(total, question) {
+                    return total + Number(question.marks || marksPerQuestion);
+                }, 0);
+
+                document.getElementById("totalMarksText").textContent = totalMarks;
+
+                timeLeft = durationMinutes * 60;
+                updateTimer();
+
+                scheduleMessage.classList.remove("hidden");
+                scheduleMessage.innerHTML =
+                    `✅ Test is currently open.<br><br>` +
+                    `Available until: <strong>${formatDateTime(testData.endTime)}</strong>`;
+
+                startButton.disabled = false;
+                startButton.textContent = "Enter Fullscreen & Start Test";
+
+            } catch (error) {
+
+                console.error("Test loading error:", error);
+
+                scheduleMessage.classList.remove("hidden");
+                scheduleMessage.classList.add("closed");
+                scheduleMessage.textContent =
+                    error.message || "Unable to load the aptitude test.";
+
+                startButton.disabled = true;
+                startButton.textContent = "Unable to Load Test";
+            }
+        }
+
+
+        function formatDateTime(value) {
+
+            if (!value) {
+                return "Not available";
+            }
+
+            const date = new Date(value);
+
+            if (isNaN(date.getTime())) {
+                return "Not available";
+            }
+
+            return date.toLocaleString("en-IN", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true
+            });
+        }
+
+
+        // ------------------------------------------
         // DOM ELEMENTS
+        // ------------------------------------------
+
         // ------------------------------------------
 
         const startScreen =
@@ -773,7 +767,21 @@
 
         async function startTest() {
 
-            if (testStarted) {
+            if (testStarted || questions.length === 0) {
+                return;
+            }
+
+            // Final client-side availability check.
+            // The server remains the authoritative check.
+            const now = new Date();
+
+            if (startTime && now < startTime) {
+                alert("The aptitude test has not started yet.");
+                return;
+            }
+
+            if (endTime && now >= endTime) {
+                alert("The aptitude test is now closed.");
                 return;
             }
 
@@ -1140,31 +1148,6 @@
 
 
         // ------------------------------------------
-        // CALCULATE SCORE
-        // ------------------------------------------
-
-        function calculateScore() {
-
-            let score = 0;
-
-            questions.forEach(function (question, index) {
-
-                if (
-                    answers[index] === question.answer
-                ) {
-
-                    score++;
-
-                }
-
-            });
-
-            return score;
-
-        }
-
-
-        // ------------------------------------------
         // FORMAT TIME
         // ------------------------------------------
 
@@ -1185,13 +1168,13 @@
         // SUBMIT TEST
         // ------------------------------------------
 
-        function submitTest(status = "Submitted") {
+        async function submitTest(status = "Submitted") {
 
-            if (testSubmitted) {
+            if (testSubmitted || submissionInProgress) {
                 return;
             }
 
-            testSubmitted = true;
+            submissionInProgress = true;
 
 
             if (timerInterval) {
@@ -1201,97 +1184,211 @@
             }
 
 
-            const score =
-                calculateScore();
-
-
             const timeTaken =
-                Math.floor(
-                    (Date.now() - testStartTime) / 1000
-                );
+                testStartTime
+                    ? Math.floor(
+                        (Date.now() - testStartTime) / 1000
+                    )
+                    : 0;
 
 
-            // Exit fullscreen
-            if (document.fullscreenElement) {
+            /*
+             * Convert selected option indexes into A/B/C/D.
+             *
+             * Correct answers are NOT stored in this page.
+             * The Apps Script checks the answers securely
+             * against the Questions sheet.
+             */
 
-                document.exitFullscreen()
-                    .catch(function () {});
+            const optionLetters = ["A", "B", "C", "D"];
 
-            }
+            const submittedAnswers = {};
 
+            questions.forEach(function(question, index) {
 
-            testScreen.classList.add("hidden");
+                const selectedIndex = answers[index];
 
-            resultScreen.classList.remove("hidden");
+                if (
+                    selectedIndex !== null &&
+                    selectedIndex !== undefined &&
+                    optionLetters[selectedIndex]
+                ) {
 
+                    submittedAnswers[String(question.qNo)] =
+                        optionLetters[selectedIndex];
 
-            document.getElementById("resultName")
-                .textContent =
-                participant.fullName || "-";
+                }
 
+            });
 
-            document.getElementById("resultEmail")
-                .textContent =
-                participant.email || "-";
-
-
-            document.getElementById("resultTime")
-                .textContent =
-                formatTime(timeTaken);
-
-
-            document.getElementById("resultViolations")
-                .textContent =
-                violationCount;
-
-
-            document.getElementById("resultStatus")
-                .textContent =
-                status;
-
-
-            // ------------------------------------------
-            // SAVE RESULT TO GOOGLE SHEETS
-            // ------------------------------------------
-
-            const GOOGLE_SCRIPT_URL =
-                "https://script.google.com/macros/s/AKfycbzSl7e3zdRJWWqQCgvRkkgluu1uGs07SxlbP_jtRsS6JXoj6iYN8lDXPTDEp-k9aHXH/exec";
 
             const formData = new URLSearchParams();
 
             formData.append("action", "submitTest");
-            formData.append("fullName", participant.fullName || "");
-            formData.append("email", participant.email || "");
-            formData.append("passkey", participant.passkey || "");
-            formData.append("score", score);
-            formData.append("total", questions.length);
-            formData.append("timeTaken", formatTime(timeTaken));
-            formData.append("tabSwitches", violationCount);
-            formData.append("status", status);
 
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(result => {
-                console.log("Test result saved:", result);
+            formData.append(
+                "fullName",
+                participant.fullName || ""
+            );
+
+            formData.append(
+                "email",
+                participant.email || ""
+            );
+
+            formData.append(
+                "passkey",
+                participant.passkey || ""
+            );
+
+            formData.append(
+                "challengeId",
+                challengeId
+            );
+
+            formData.append(
+                "answers",
+                JSON.stringify(submittedAnswers)
+            );
+
+            formData.append(
+                "timeTaken",
+                formatTime(timeTaken)
+            );
+
+            formData.append(
+                "tabSwitches",
+                violationCount
+            );
+
+            formData.append(
+                "status",
+                status
+            );
+
+
+            /*
+             * Show saving message while the result is being
+             * securely checked and saved by Apps Script.
+             */
+
+            const submitButtonText =
+                submitButton.textContent;
+
+            submitButton.disabled = true;
+
+            submitButton.textContent =
+                "Submitting...";
+
+
+            try {
+
+                const response = await fetch(
+                    GOOGLE_SCRIPT_URL,
+                    {
+                        method: "POST",
+                        body: formData
+                    }
+                );
+
+                const result =
+                    await response.json();
+
 
                 if (!result.success) {
-                    console.error(
-                        "Google Sheets error:",
-                        result.message
+
+                    throw new Error(
+                        result.message ||
+                        "Unable to save your test."
                     );
+
                 }
-            })
-            .catch(error => {
+
+
+                /*
+                 * Only mark the test as submitted after
+                 * Google Sheets confirms successful saving.
+                 */
+
+                testSubmitted = true;
+
+
+                // Exit fullscreen
+                if (document.fullscreenElement) {
+
+                    document.exitFullscreen()
+                        .catch(function () {});
+
+                }
+
+
+                testScreen.classList.add("hidden");
+
+                resultScreen.classList.remove("hidden");
+
+
+                document.getElementById("resultName")
+                    .textContent =
+                    participant.fullName || "-";
+
+
+                document.getElementById("resultEmail")
+                    .textContent =
+                    participant.email || "-";
+
+
+                document.getElementById("resultTime")
+                    .textContent =
+                    formatTime(timeTaken);
+
+
+                document.getElementById("resultViolations")
+                    .textContent =
+                    violationCount;
+
+
+                document.getElementById("resultStatus")
+                    .textContent =
+                    status;
+
+
+                /*
+                 * Do NOT display the score.
+                 */
+
+                console.log(
+                    "Test result saved successfully."
+                );
+
+            } catch (error) {
+
                 console.error(
                     "Error saving test result:",
                     error
                 );
-            });
+
+
+                submissionInProgress = false;
+
+                submitButton.disabled = false;
+
+                submitButton.textContent =
+                    submitButtonText;
+
+
+                alert(
+                    "Your test result could not be saved.\n\n" +
+                    error.message +
+                    "\n\nPlease click Submit Test again."
+                );
+
+            }
 
         }
+
+
+        // Load the test configuration and questions when the page opens
+        loadTestFromServer();
 
 
         // ------------------------------------------
