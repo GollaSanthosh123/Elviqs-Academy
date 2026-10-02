@@ -1200,34 +1200,33 @@ options.forEach(function (option, index) {
 
 
             /*
-             * Convert selected option indexes into A/B/C/D.
-             *
-             * Correct answers are NOT stored in this page.
-             * The Apps Script checks the answers securely
-             * against the Questions sheet.
-             */
+ * Prepare selected answers for Apps Script.
+ *
+ * 0 = Option A
+ * 1 = Option B
+ * 2 = Option C
+ * 3 = Option D
+ */
 
-            const optionLetters = ["A", "B", "C", "D"];
+const submittedAnswers = [];
 
-            const submittedAnswers = {};
+questions.forEach(function(question, index) {
 
-            questions.forEach(function(question, index) {
+    const selectedIndex = answers[index];
 
-                const selectedIndex = answers[index];
+    if (
+        selectedIndex !== null &&
+        selectedIndex !== undefined
+    ) {
 
-                if (
-                    selectedIndex !== null &&
-                    selectedIndex !== undefined &&
-                    optionLetters[selectedIndex]
-                ) {
+        submittedAnswers.push({
+            qNo: question.qNo,
+            answer: selectedIndex
+        });
 
-                    submittedAnswers[String(question.qNo)] =
-                        optionLetters[selectedIndex];
+    }
 
-                }
-
-            });
-
+});
 
             const formData = new URLSearchParams();
 
