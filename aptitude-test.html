@@ -643,8 +643,8 @@
                 durationMinutes = Number(testData.durationMinutes || 30);
                 marksPerQuestion = Number(testData.marksPerQuestion || 1);
 
-                startTime = testData.startTime ? new Date(testData.startTime) : null;
-                endTime = testData.endTime ? new Date(testData.endTime) : null;
+                startTime = testData.startDate ? new Date(testData.startDate) : null;
+                endTime = testData.endDate ? new Date(testData.endDate) : null;
 
                 questions = Array.isArray(testData.questions)
                     ? testData.questions
@@ -675,7 +675,7 @@
                 scheduleMessage.classList.remove("hidden");
                 scheduleMessage.innerHTML =
                     `✅ Test is currently open.<br><br>` +
-                    `Available until: <strong>${formatDateTime(testData.endTime)}</strong>`;
+                    `Available until: <strong>${formatDateTime(testData.endDate)}</strong>`;
 
                 startButton.disabled = false;
                 startButton.textContent = "Enter Fullscreen & Start Test";
@@ -905,42 +905,49 @@
             optionsElement.innerHTML = "";
 
 
-            question.options.forEach(function (option, index) {
+            const options = [
+    question.optionA,
+    question.optionB,
+    question.optionC,
+    question.optionD
+];
 
-                const optionDiv =
-                    document.createElement("label");
+options.forEach(function (option, index) {
 
-                optionDiv.className = "option";
+    const optionDiv =
+        document.createElement("label");
 
-
-                if (answers[currentQuestion] === index) {
-
-                    optionDiv.classList.add("selected");
-
-                }
-
-
-                optionDiv.innerHTML = `
-                    <input
-                        type="radio"
-                        name="answer"
-                        value="${index}"
-                        ${answers[currentQuestion] === index ? "checked" : ""}
-                    >
-                    ${option}
-                `;
+    optionDiv.className = "option";
 
 
-                optionDiv.addEventListener("click", function () {
+    if (answers[currentQuestion] === index) {
 
-                    selectAnswer(index);
+        optionDiv.classList.add("selected");
 
-                });
+    }
 
 
-                optionsElement.appendChild(optionDiv);
+    optionDiv.innerHTML = `
+        <input
+            type="radio"
+            name="answer"
+            value="${index}"
+            ${answers[currentQuestion] === index ? "checked" : ""}
+        >
+        <span>${option}</span>
+    `;
 
-            });
+
+    optionDiv.addEventListener("click", function () {
+
+        selectAnswer(index);
+
+    });
+
+
+    optionsElement.appendChild(optionDiv);
+
+});
 
 
             updateNavigation();
