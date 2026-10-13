@@ -39,6 +39,55 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Header branding: logo + name, matching the Exam Portal -->
+    <style>
+        .brand-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+            text-decoration: none;
+            min-width: 0;
+        }
+        .brand-logo {
+            display: block;
+            width: 58px;
+            height: 58px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.25;
+        }
+        .brand-title {
+            color: #172554;
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            font-size: 1.08rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            white-space: nowrap;
+        }
+        .brand-tagline {
+            margin-top: 4px;
+            color: #64748b;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            white-space: nowrap;
+        }
+        @media (max-width: 480px) {
+            .brand-link { gap: 8px; }
+            .brand-logo { width: 44px; height: 44px; }
+            .brand-title { font-size: 0.9rem; }
+            .brand-tagline { font-size: 0.52rem; letter-spacing: 0.06em; }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -74,13 +123,15 @@
 
         <div class="nav-container">
 
-            <!-- Logo -->
-
-            <a href="#home" class="logo">
-
+            <!-- Academy logo and brand name (matching the Exam Portal header) -->
+            <a href="#home" class="brand-link" aria-label="Elviq's Academy Home">
                 <img src="assets/elviqs-logo-main.jpeg"
-                     alt="Elviq's Academy Logo">
-
+                     alt="Elviq's Academy Logo"
+                     class="brand-logo">
+                <span class="brand-text">
+                    <span class="brand-title">Elviq's Academy</span>
+                    <span class="brand-tagline">LEARN · GROW · ACHIEVE</span>
+                </span>
             </a>
 
 
